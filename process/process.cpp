@@ -1,4 +1,4 @@
-﻿#include <iostream>
+#include <iostream>
 #include <fstream>
 #include <sstream>
 #include <vector>
@@ -10,6 +10,11 @@
 #include <chrono>
 
 using namespace std;
+
+
+//2-1 못품
+//2-2 못품
+//2-3 풀음
 
 mutex cout_mutex;
 
