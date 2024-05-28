@@ -5,16 +5,10 @@
 #include <thread>
 #include <mutex>
 #include <algorithm>
-#include <cmath>
 #include <numeric>
 #include <chrono>
 
 using namespace std;
-
-
-//2-1 못품
-//2-2 못품
-//2-3 풀음
 
 mutex cout_mutex;
 
@@ -71,10 +65,10 @@ void prime_command(int x) {
     cout << "Number of primes <= " << x << " is " << count << endl;
 }
 
-long long sum(int x) {
+long long sum(int start, int end) {
     long long total = 0;
-    for (int i = 1; i <= x; ++i) {
-        total = (total + i) % 1000000;
+    for (int i = start; i <= end; ++i) {
+        total += i;
     }
     return total;
 }
@@ -84,14 +78,16 @@ void sum_command(int x, int m, int num) {
         vector<thread> threads;
         vector<long long> results(m);
         int chunk_size = x / m;
+        int remainder = x % m;
 
         for (int j = 0; j < m; ++j) {
-            threads.push_back(thread([j, chunk_size, &results]() {
-                long long local_sum = 0;
-                for (int k = j * chunk_size + 1; k <= (j + 1) * chunk_size; ++k) {
-                    local_sum = (local_sum + k) % 1000000;
-                }
-                results[j] = local_sum;
+            int start = j * chunk_size + 1;
+            int end = (j + 1) * chunk_size;
+            if (j == m - 1) {
+                end += remainder;
+            }
+            threads.push_back(thread([start, end, &results, j]() {
+                results[j] = sum(start, end);
                 }));
         }
 
@@ -99,7 +95,7 @@ void sum_command(int x, int m, int num) {
             t.join();
         }
 
-        long long total_sum = accumulate(results.begin(), results.end(), 0LL) % 1000000;
+        long long total_sum = accumulate(results.begin(), results.end(), 0LL);
         lock_guard<mutex> lock(cout_mutex);
         cout << "Sum is " << total_sum << endl;
     }
