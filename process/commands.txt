@@ -1,4 +1,4 @@
 echo abc -p 5 -d 50 -n 3
-sum 10000 -m 4 -n 2
+sum 100000 -m 4 -n 2
 gcd 12 18
 dummy -n 100
