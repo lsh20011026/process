@@ -12,6 +12,10 @@
 using namespace std;
 
 mutex cout_mutex;
+//2-1 못품
+//2-2 못품
+// 2-3 풀음
+
 
 // 전역 변수로 실행 중인 프로세스 수를 관리
 int running_processes = 0;
