@@ -12,8 +12,8 @@
 using namespace std;
 
 mutex cout_mutex;
-//2-1 못품
-//2-2 못품
+//2-1 다른 파일에 품
+//2-2 다른 파일에 품
 // 2-3 풀음
 
 
